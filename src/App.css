@@ -1,38 +1,86 @@
-.App {
-  text-align: center;
-}
+/* App.css */
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Overall page styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #f2f2f2, #e6e6e6);
+  margin: 0;
+  padding: 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  height: 100vh;
+}
+
+/* Container for the upload section */
+.upload-container {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 40px 50px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  max-width: 450px;
+  width: 100%;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.upload-container:hover {
+  transform: translateY(-5px);
+}
+
+/* Heading styling */
+.upload-container h2 {
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+  color: #333333;
+  letter-spacing: 0.5px;
+}
+
+/* File input styling */
+.upload-container input[type="file"] {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 2px dashed #cccccc;
+  border-radius: 8px;
+  width: 100%;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.upload-container input[type="file"]:hover {
+  border-color: #007bff;
+  background: #f0f8ff;
+}
+
+/* Upload button styling */
+.upload-container button {
+  background-color: #007bff;
   color: white;
+  font-size: 1rem;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.App-link {
-  color: #61dafb;
+.upload-container button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Responsive design for small screens */
+@media (max-width: 500px) {
+  .upload-container {
+    padding: 30px 20px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .upload-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .upload-container button {
+    width: 100%;
   }
 }

@@ -1,44 +1,47 @@
-// FileUpload.js
+import './App.css';  // or './FileUpload.css' if you named it that
+
 import React, { useState } from "react";
 
-function FileUpload() {
+export default function FileUpload() {
   const [file, setFile] = useState(null);
 
-  // Triggered when user selects a file
-  const handleFileChange = (event) => {
-    setFile(event.target.files[0]); // Save the first selected file
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
   };
 
-  // Triggered when user clicks "Upload"
-  const handleUpload = () => {
+  const handleUpload = async () => {
     if (!file) {
       alert("Please select a file first!");
       return;
     }
 
-    // For now, just log the file info
-    console.log("Selected file:", file);
+    const formData = new FormData();
+    formData.append("file", file);
 
-    // Later: send file to backend using fetch or axios
-    // Example:
-    // const formData = new FormData();
-    // formData.append("file", file);
-    // fetch("/api/upload", { method: "POST", body: formData });
+    try {
+      const response = await fetch("http://127.0.0.1:5000/upload-grantees", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert(data.message);
+      } else {
+        alert("Upload failed: " + data.message);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Upload failed! See console for details.");
+    }
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Upload a File</h2>
-      <input type="file" onChange={handleFileChange} />
-      <br /><br />
+    <div className="upload-container">
+      <h2>Upload Grantee File</h2>
+      <input type="file" accept=".csv" onChange={handleFileChange} />
       <button onClick={handleUpload}>Upload</button>
-      {file && (
-        <div style={{ marginTop: "10px" }}>
-          <strong>Selected File:</strong> {file.name}
-        </div>
-      )}
     </div>
   );
-}
 
-export default FileUpload;
+}
